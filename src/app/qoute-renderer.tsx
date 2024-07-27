@@ -1,20 +1,26 @@
 "use client";
-import { getQoutes } from "@/data/dto/getQuotes";
-import { getQueryClient } from "@/lib/get-query-client";
 import { qouteInfinityQueryOptions } from "@/lib/query/get-qoutes-query";
-import {
-  InfiniteQueryObserver,
-  useSuspenseInfiniteQuery,
-} from "@tanstack/react-query";
+import { useSuspenseInfiniteQuery } from "@tanstack/react-query";
 import { Loader2 } from "lucide-react";
 import React, { useEffect, useRef } from "react";
-import { InView, useInView } from "react-intersection-observer";
+import { useInView } from "react-intersection-observer";
+
 /** Content will start fetching  500px distance  */
 const VIEW_BEFORE_PX = 500;
-
+// even tho this is a "use client" it will be initially be rendered on server :D
+// test it out by uncommenting "test me console.log" / use post-man to fetch as a get request
 export default function QouteRenderer() {
-  const { data, fetchNextPage, isFetchingNextPage, fetchPreviousPage,hasNextPage } =
-    useSuspenseInfiniteQuery(qouteInfinityQueryOptions);
+  console.log("Uncomment me! am running on server :D"); //Uncomment this
+  const {
+    data,
+    fetchNextPage,
+    isFetchingNextPage,
+    fetchPreviousPage,
+    hasNextPage,
+  } = useSuspenseInfiniteQuery(qouteInfinityQueryOptions);
+
+  console.log("I Also have data!!", data); //Uncomment this
+
   const { ref, inView } = useInView({
     threshold: 0,
     rootMargin: `${VIEW_BEFORE_PX}px 0px`,
@@ -24,7 +30,8 @@ export default function QouteRenderer() {
       fetchNextPage();
     }
   }, [inView, fetchNextPage]);
-  // console.log(hasNextPage)
+
+  // Below code is rendering HTML contents ->
   return (
     <div className="flex flex-col">
       <div className=" my-12">
@@ -36,7 +43,8 @@ export default function QouteRenderer() {
           </p>
           <p>- SEO friendly and SSR support</p>
           <p>
-            - Loads the data on the go. Meaning will fetch before {VIEW_BEFORE_PX}px Of next content 
+            - Loads the data on the go. Meaning will fetch before{" "}
+            {VIEW_BEFORE_PX}px Of next content
           </p>
         </div>
       </div>
