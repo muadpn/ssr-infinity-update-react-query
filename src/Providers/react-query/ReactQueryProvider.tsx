@@ -22,7 +22,7 @@ export function Providers(props: { children: React.ReactNode }) {
     <QueryClientProvider client={queryClient}>
       <ReactQueryStreamedHydration>
         {props.children}
-        <ReactQueryDevtools client={queryClient} />
+        <ReactQueryDevtools initialIsOpen={true} client={queryClient} />
       </ReactQueryStreamedHydration>
     </QueryClientProvider>
   );

@@ -48,7 +48,7 @@ export default function QouteRenderer() {
           </p>
         </div>
       </div>
-      <div className="grid grid-cols-5 gap-2">
+      <div className="flex flex-wrap gap-2 p-2  justify-center">
         {data.pages ? (
           data.pages.map((item) =>
             item?.quotes.map((qoute, i) => {
@@ -56,7 +56,7 @@ export default function QouteRenderer() {
               return (
                 <div
                   key={`${qoute.id}-${Math.random()}`}
-                  className="border-2 max-w-md w-full  rounded-md py-2 px-1"
+                  className="border-2 max-w-[300px] w-full  rounded-md py-2 px-1"
                 >
                   <p>Qoute number: {qoute.id}</p>
                   <p> Author: {qoute.author}</p>
